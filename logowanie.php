@@ -52,7 +52,7 @@ if ($konto!="" and $password!="")
    
 	if($row['user_rang'] == 1)
 	{
-	echo '<META HTTP-EQUIV="Refresh" CONTENT="0;index_2.php">';
+	echo '<META HTTP-EQUIV="Refresh" CONTENT="0;panel.php">';
 	}
 	else
 	{
@@ -70,8 +70,10 @@ if ($konto!="" and $password!="")
 				if(isset($_SESSION['login']))
 				{
 				echo 'Jestes zalogowany jako: '.$_SESSION['login'].'<h3 />';
-echo '<a href="zmiana.php">Zmiana hasla</a><br />';
+
 				echo '<a href="logout.php">Wyloguj</a><br />';
+echo '<a href="zmiana.php">Zmiana hasla</a><br />';
+echo '<a href="moje_zadania.php">Moje zadania</a><br />';
 				}
 				else
 				{

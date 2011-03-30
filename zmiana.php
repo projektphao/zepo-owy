@@ -52,7 +52,15 @@ else{
 <title>zmiana hasla</title>
 </head>
 <body>
+<?php
+				if(isset($_SESSION['login']))
+				{
+				echo 'Jestes zalogowany jako: '.$_SESSION['login'].'<h3 />';
 
+				echo '<a href="logout.php">Wyloguj</a><br />';
+echo '<a href="moje_zadania.php">Moje Zadania</a><br />';
+				}
+?>
 <form action="zmiana.php" method="post">
 <table>
 <td><strong>stare haslo:</strong></td><td><input name="pass0" type="password" value="" /></td>
