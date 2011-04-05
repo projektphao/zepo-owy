@@ -10,7 +10,14 @@ $rang1 = mysql_fetch_assoc($rang);
 
 	if($rang1['user_rang'] == 1)
 	{
+
 	$tytul=($_POST['tytul']);
+
+$zap="SELECT ID FROM zadania WHERE tytul ='$tytul'";
+$wynik=mysql_query($zap) or die("Wyst±pi³ b³±d");
+ $wynik = mysql_num_rows($wynik);
+ if ($wynik==0)   {
+
 	$opis=($_POST['tresc']);
 	$otwarcie=($_POST['otwarcie']);
 	$zamkniecie=($_POST['zamkniecie']);
@@ -20,6 +27,10 @@ $zapytanie = "INSERT INTO zadania(tytul,opis,data_otwarcia,data_zamkniecia,wejsc
 mysql_query($zapytanie) or die("Wyst±pi³ b³±d" );
 echo('Zadanie zostalo dodane');
 	  echo '<META HTTP-EQUIV="Refresh" CONTENT="1;dodaj_zadanie.php">';
+}
+else
+{ echo ('Zadanie o podanym tytule juz istnieje!');
+ echo '<META HTTP-EQUIV="Refresh" CONTENT="1;dodaj_zadanie.php">';}
 
 
 }

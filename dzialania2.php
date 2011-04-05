@@ -8,12 +8,12 @@ if(!empty($delete))
 {
 		$checkbox=($_POST['checkbox']);
 foreach ($checkbox as &$del_id) {
-			$a="DELETE FROM zadania WHERE tytul = '$del_id';";
+			$a="DELETE FROM users WHERE login = '$del_id';";
 			$ai = mysql_query($a) or die("wystapil blad!" );
 }
 unset($del_id);
-			echo "<h3>Usunieto zadanie!</h3>";
-			echo '<META HTTP-EQUIV="Refresh" CONTENT="1;wyswietl_zadania.php">';
+			echo "<h3>Usunieto uzytkownika!</h3>";
+			echo '<META HTTP-EQUIV="Refresh" CONTENT="1;uzytkownicy.php">';
 }
 
 if(!empty($grupa))
@@ -26,18 +26,17 @@ if(!empty($wynik))
 $checkbox=($_POST['checkbox']);
                         foreach ($checkbox as &$up_id) {
 		       // $up_id = ($_POST['checkbox']);
-			$a="UPDATE zadania SET grupa='$grupa' WHERE tytul = '$up_id';";
+			$a="UPDATE users SET grupa='$grupa' WHERE login = '$up_id';";
 			$ai = mysql_query($a) or die("wystapil blad!" );
 			}
 unset($up_id);		
-			echo "<h3>Dodano zadanie do grupy!</h3>";
-			echo '<META HTTP-EQUIV="Refresh" CONTENT="1;wyswietl_zadania.php">';
+			echo "<h3>Dodano studenta do grupy!</h3>";
+			echo '<META HTTP-EQUIV="Refresh" CONTENT="1;uzytkownicy.php">';
 }
 else {
 echo ("Nie ma takiej grupy");
-echo '<META HTTP-EQUIV="Refresh" CONTENT="1;wyswietl_zadania.php">';
+echo '<META HTTP-EQUIV="Refresh" CONTENT="1;uzytkownicy.php">';
 }
 }
 
 ?>
-

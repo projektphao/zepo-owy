@@ -3,7 +3,13 @@ session_start();
 	if(isset($_SESSION['login']))
 		{
 require('conn.php');
-$zap="SELECT * FROM zadania";
+$konto =  ($_SESSION['login']);
+$zap="SELECT grupa FROM users WHERE login='$konto'";
+$wynik=mysql_query($zap) or die("wystapil blad" );
+$wynik = mysql_fetch_assoc($wynik);
+$grupa=$wynik['grupa'];
+
+$zap="SELECT * FROM zadania WHERE grupa='$grupa'";
 $wynik=mysql_query($zap) or die("wystapil blad" );
 $ile=mysql_num_rows($wynik);	
 ?>

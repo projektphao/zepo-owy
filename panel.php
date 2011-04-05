@@ -31,6 +31,10 @@ $rang1 = mysql_fetch_assoc($rang);
 <a href="dodaj_zadanie.php">Dodaj zadanie</a>
 <br>
 <a href="wyswietl_zadania.php">Przejrzyj zadania</a>
+<br>
+<a href="dodaj_grupe.php">Dodaj grupe</a>
+<br>
+<a href="uzytkownicy.php">Uzytkownicy</a>
 
 <?php
 }
