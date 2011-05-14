@@ -1,48 +1,60 @@
 <?php
+
+$page_title = 'Dodaj zadanie';
+include('./naglowek.inc');
+
 session_start();
-	if(isset($_SESSION['login']))
-		{
-require('conn.php');
-$konto =  ($_SESSION['login']);
-$zap="SELECT user_rang FROM users WHERE login='$konto'";
-$rang=mysql_query($zap) or die("Wyst±pi³ b³±d");
-$rang1 = mysql_fetch_assoc($rang);
 
-	if($rang1['user_rang'] == 1)
-	{
+if ($_GET['source'] == 'dodaj_zadanie.php') {
 
-	$tytul=($_POST['tytul']);
+if(isset($_SESSION['login'])) {
+    require('conn.php');
+    $konto=($_SESSION['login']);
+    $zap="SELECT user_rang FROM users WHERE login='$konto'";
+    $rang=mysql_query($zap) or die("Wyst±pi³ b³±d!");
+    $rang1 = mysql_fetch_assoc($rang);
+    
+    if($rang1['user_rang'] == 1) {
+        $tytul=($_POST['tytul']);
+        $zap="SELECT ID FROM zadania WHERE tytul ='$tytul'";
+        $wynik=mysql_query($zap) or die("Wyst±pi³ b³±d!");
+        $wynik = mysql_num_rows($wynik);
 
-$zap="SELECT ID FROM zadania WHERE tytul ='$tytul'";
-$wynik=mysql_query($zap) or die("Wyst±pi³ b³±d");
- $wynik = mysql_num_rows($wynik);
- if ($wynik==0)   {
-
-	$opis=($_POST['tresc']);
-	$otwarcie=($_POST['otwarcie']);
-	$zamkniecie=($_POST['zamkniecie']);
-	$wejscia=($_POST['wejscia']);
-	$wyjscia=($_POST['wyjscia']);
-$zapytanie = "INSERT INTO zadania(tytul,opis,data_otwarcia,data_zamkniecia,wejscia,wyjscia) VALUES ('$tytul' ,'$opis','$otwarcie','$zamkniecie','$wejscia','$wyjscia')";
-mysql_query($zapytanie) or die("Wyst±pi³ b³±d" );
-echo('Zadanie zostalo dodane');
-	  echo '<META HTTP-EQUIV="Refresh" CONTENT="1;dodaj_zadanie.php">';
+        if ($wynik==0) {
+            $opis=($_POST['tresc']);
+            $otwarcie=($_POST['otwarcie']);
+            $zamkniecie=($_POST['zamkniecie']);
+            $wejscia=($_POST['wejscia']);
+            $wyjscia=($_POST['wyjscia']);
+            if($opis != '' && $otwarcie != '' && $zamkniecie != '' && $tytul != '' && $wejscia != '' && $wyjscia != ''){
+            $zapytanie="INSERT INTO zadania(tytul,opis,data_otwarcia,data_zamkniecia,wejscia,wyjscia) VALUES ('$tytul' ,'$opis','$otwarcie','$zamkniecie','$wejscia','$wyjscia')";
+            mysql_query($zapytanie) or die("Wyst±pi³ b³±d!" );
+            echo('Zadanie zosta³o dodane.<br />');
+            echo '<META HTTP-EQUIV="Refresh" CONTENT="1;dodaj_zadanie.php">';
+            } else if ($opis == '' || $otwarcie == '' || $zamkniecie == '' || $tytul == '' || $wejscia == '' || $wyjscia == ''){
+                echo 'Nie mo¿esz dodaæ pustego zadania!<br />';
+            echo '<META HTTP-EQUIV="Refresh" CONTENT="1;dodaj_zadanie.php">';
+            }
+        }
+        else {
+            echo 'Zadanie o podanym tytule ju¿ istnieje!<br />';
+            echo '<META HTTP-EQUIV="Refresh" CONTENT="1;dodaj_zadanie.php">';
+        }
+    }
+    else {
+        echo 'Nie masz uprawnieñ administratora!<br />';
+    }
 }
-else
-{ echo ('Zadanie o podanym tytule juz istnieje!');
- echo '<META HTTP-EQUIV="Refresh" CONTENT="1;dodaj_zadanie.php">';}
-
-
+else {
+    echo 'Zaloguj siê!<br />';
+    echo '<META HTTP-EQUIV="Refresh" CONTENT="2;logowanie.php">';
 }
-else
-echo 'nie masz uprawnien administratora';
+
+} else { // Strona ¼ród³owa nieokre¶lona
+    echo 'Dostêp w nieprawid³owy sposób!<br />';
+    echo '<META HTTP-EQUIV="Refresh" CONTENT="2;dodaj_zadanie.php">';
 }
-else
-{echo 'Zaloguj sie!!!<br />';
-				echo '<META HTTP-EQUIV="Refresh" CONTENT="2;logowanie.php">';}
+
+include('./stopka.inc');
 
 ?>
-
-
-	
-	

@@ -1,0 +1,1 @@
+alert('Poda³e¶ z³e dane!');
