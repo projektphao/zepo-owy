@@ -16,7 +16,7 @@ if(isset($_SESSION['login'])){
         if ($passw0==$wynik1['pass']) {
             if ($_POST['pass1']==$_POST['pass2']) {
                 $password = sha1(mysql_real_escape_string (trim($_POST['pass1'])));
-                $zapytanie="UPDATE users SET pass = '$password' WHERE login = '$konto'";
+                $zapytanie="UPDATE users SET pass = '$password', status=1 WHERE login = '$konto'";
                 mysql_query($zapytanie) or die("Wyst±pi³ b³±d" );
                 echo('Haslo do konta '.$login.' zostalo zmienione');
                 echo '<META HTTP-EQUIV="Refresh" CONTENT="1;logowanie.php">';

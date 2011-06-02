@@ -1,8 +1,8 @@
 <?
-define('DB_HOST','mysql.cba.pl');
-define('DB_USER','madtest1'); 
-define('DB_PASS','12345');
-define('DB_DB','madtest_cba_pl');
+define('DB_HOST','localhost');
+define('DB_USER','projekt2'); 
+define('DB_PASS','phao123');
+define('DB_DB','projekt2');
 
 $connect = mysql_connect(DB_HOST, DB_USER, DB_PASS)
 or die('Nie uda³o po³±czyc siê z baz± danych. '.mysql_error());

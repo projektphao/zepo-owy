@@ -6,13 +6,18 @@ include('./naglowek.inc');
 session_start();
 
 if(isset($_SESSION['login'])) {
-    require('conn.php');
+  require('conn.php');
     $konto=($_SESSION['login']);
+$zap10="SELECT status FROM users WHERE login='$konto'";
+    $wynik10=mysql_query($zap10) or die("Wystapi³ b³±d!");
+$wynik10 = mysql_fetch_assoc($wynik10);
+if($wynik10[status] != 0){
+  
     $zap="SELECT grupa FROM users WHERE login='$konto'";
     $wynik=mysql_query($zap) or die("Wystapi³ b³±d!");
     $wynik = mysql_fetch_assoc($wynik);
     $grupa=$wynik['grupa'];
-    $zap="SELECT zadania.ID, zadania.tytul, zadania.opis, zadania.data_otwarcia, zadania.data_zamkniecia, zadania.grupa, rozwiazania.ocena, rozwiazania.koment FROM zadania LEFT JOIN rozwiazania ON zadania.ID=rozwiazania.ID_zad WHERE zadania.grupa='$grupa'";
+    $zap="SELECT zadania.ID, zadania.tytul, zadania.opis, zadania.data_otwarcia, zadania.data_zamkniecia, zadania.grupa, rozwiazania.ocena, rozwiazania.koment FROM zadania LEFT JOIN rozwiazania ON zadania.ID=rozwiazania.ID_zad WHERE zadania.grupa='$grupa' AND rozwiazania.login='$konto'";
     $wynik=mysql_query($zap) or die("wystapil blad" );
     $ile=mysql_num_rows($wynik);
     echo 'Jeste¶ zalogowany jako: '.$_SESSION['login'].'';
@@ -78,6 +83,10 @@ else echo '<tr><td>zadanie jeszcze nie jest otwarte</td></tr>';
 </table>
 
 <?php
+}
+else{ echo "Przy pierwszym logowaniu musisz zmienic haslo";
+echo '<META HTTP-EQUIV="Refresh" CONTENT="1;zmiana.php">';}
+
 }
 
 include('./stopka.inc');
